@@ -19,7 +19,7 @@ Add as an appender via config file:
 {
     "appenders": [
     {
-        "type": "azure",
+        "type": "log4js-node-azure",
         "storageAccount": "<azure storage account name>",
         "storageAccountKey": "<azure storage account key>",
         "tableName": "<table name to use or create, defaults to log4jslog>"

@@ -1,7 +1,7 @@
 {
   "name": "log4js-node-azure",
   "description": "A log4js appender that writes to Azure Table Storage",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "main": "main.js",
   "author": {
     "name": "Mike Hanson",

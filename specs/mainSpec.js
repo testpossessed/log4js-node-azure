@@ -4,7 +4,7 @@ describe('Azure Appender', function() {
     var mockery     = require('mockery');
     var substitute  = require('jssubstitute');
     var arg         = substitute.arg;
-    var azureMock, tableServiceMock;
+    var azureMock, tableServiceMock, entityGeneratorMock;
     var validConfig = {
         storageAccount: 'myAccount', storageAccountKey: 'lkasjdflkdlfdjlfjdlfjldfjldjffjlk==', tableName: 'log4jslog'
     };
@@ -12,6 +12,12 @@ describe('Azure Appender', function() {
     beforeEach(function() {
         substitute.throwErrors();
         azureMock        = substitute.for(['createTableService']);
+        entityGeneratorMock = substitute.for(['String']);
+        entityGeneratorMock.returns('String', {'_': 'string'})
+        azureMock.TableUtilities = {
+            entityGenerator: entityGeneratorMock
+        };
+
         tableServiceMock = substitute.for(['createTableIfNotExists', 'insertEntity']);
         azureMock.returns('createTableService', tableServiceMock);
         mockery.enable({useCleanCache: true, warnOnUnregistered: false});
@@ -92,14 +98,19 @@ describe('Azure Appender', function() {
     });
 
     it('Should insert logging event into table', function() {
-        var loggingEvent = assumeLoggingEventIsPosted();
+        assumeLoggingEventIsPosted();
         expect(tableServiceMock.receivedWith('insertEntity', validConfig.tableName, function(arg){
-            return arg.PartitionKey === validConfig.tableName
+            return arg.PartitionKey !== undefined
             && arg.RowKey !== undefined
-            && arg.Category === loggingEvent.categoryName
-            && arg.Data === loggingEvent.data
-            && arg.Level === loggingEvent.level
+            && arg.Category !== undefined
+            && arg.Data !== undefined
+            && arg.Level !== undefined
         }, arg.any(Function)));
+    });
+
+    it('Should use entity generator to create entry properties', function() {
+        assumeLoggingEventIsPosted();
+        expect(entityGeneratorMock.received('String', 5));
     });
 
     it('Should throw any error returned from insertion', function() {
@@ -111,7 +122,7 @@ describe('Azure Appender', function() {
 
     function assumeLoggingEventIsPosted() {
         var appender     = module.appender(validConfig);
-        var loggingEvent = {categoryName: 'category', data: 'message', level: 'debug', logger: {}};
+        var loggingEvent = {categoryName: 'category', data: ['message'], level: {levelStr: 'debug'}};
         appender(loggingEvent);
         return loggingEvent;
     }
