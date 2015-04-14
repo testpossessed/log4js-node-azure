@@ -33,9 +33,10 @@ Add as an appender via config file:
 ```javascript
 
 var log4js = require('log4js');
-var azureAppender = require('log4js-node-azure');
 
-log4js.addAppender(azureAppender.appender({
+log4js.loadAppender('log4js-node-azure');
+
+log4js.addAppender(log4js.appenders['log4js-node-azure']({
     storageAccount: "<azure storage account name>",
     storageAccountKey: "<azure storage account key>",
     tableName: "<table name to use or create, defaults to log4jslog>"), 'azure');
