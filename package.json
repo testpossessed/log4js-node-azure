@@ -1,0 +1,32 @@
+{
+  "name": "log4js-node-azure",
+  "description": "A log4js appender that writes to Azure Table Storage",
+  "version": "1.0.0",
+  "main": "main.js",
+  "author": {
+    "name": "Mike Hanson",
+    "email": "mike@testpossessed.com",
+    "url": "http://testpossessed.com"
+  },
+  "homepage": "https://github.com/testpossessed/log4js-node-azure",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/testpossessed/log4js-node-azure.git"
+  },
+  "dependencies": {
+    "azure-storage": "^0.4.3",
+    "log4js": "^0.6.22"
+  },
+  "devDependencies": {
+    "grunt": "^0.4.5",
+    "grunt-bumpup": "^0.6.2",
+    "grunt-contrib-watch": "^0.6.1",
+    "grunt-jasmine-nodejs": "^1.0.2",
+    "jasmine-core": "^2.2.0",
+    "jasmine-node": "^1.14.5",
+    "jasmine-reporters": "^2.0.4",
+    "jssubstitute": "^1.0.2",
+    "matchdep": "^0.3.0",
+    "mockery": "^1.4.0"
+  }
+}
