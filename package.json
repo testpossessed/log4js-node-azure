@@ -14,18 +14,18 @@
     "url": "https://github.com/testpossessed/log4js-node-azure.git"
   },
   "dependencies": {
-    "azure-storage": "^0.4.3"
+    "azure-storage": "^2.10.7"
   },
   "devDependencies": {
-    "grunt": "^0.4.5",
+    "grunt": "^1.4.1",
     "grunt-bumpup": "^0.6.2",
-    "grunt-contrib-watch": "^0.6.1",
+    "grunt-contrib-watch": "^1.1.0",
     "grunt-jasmine-nodejs": "^1.0.2",
     "jasmine-core": "^2.2.0",
-    "jasmine-node": "^1.14.5",
+    "jasmine-node": "^3.0.0",
     "jasmine-reporters": "^2.0.4",
     "jssubstitute": "^1.0.2",
-    "matchdep": "^0.3.0",
+    "matchdep": "^2.0.0",
     "mockery": "^1.4.0"
   }
 }
