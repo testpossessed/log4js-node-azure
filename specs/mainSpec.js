@@ -82,7 +82,7 @@ describe('Azure Appender', function() {
 
     it('Should prepare the azure table service on initialisation', function() {
         assumeConfigureExecuted();
-        expect(azureMock.receivedWith('createTableService', validConfig.storageAccount, validConfig.storageAccountKey));
+        expect(azureMock.receivedWith('createTableService', validConfig.storageAccount, validConfig.storageAccountKey, validConfig.storageHostName));
     });
 
     it('Should open table creating it if necessary', function() {
@@ -99,7 +99,7 @@ describe('Azure Appender', function() {
 
     it('Should insert logging event into table', function() {
         assumeLoggingEventIsPosted();
-        expect(tableServiceMock.receivedWith('insertEntity', validConfig.tableName, function(arg){
+        expect(tableServiceMock.receivedWith('insertEntity', validConfig.tableName, function(arg) {
             return arg.PartitionKey !== undefined
             && arg.RowKey !== undefined
             && arg.Category !== undefined

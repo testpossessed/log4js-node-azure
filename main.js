@@ -55,11 +55,5 @@ function configure(config) {
     return azureAppender(config);
 }
 
-function shutdown(callback) {
-
-}
-
 module.exports.name = 'azure';
-module.exports.appender = azureAppender;
 module.exports.configure = configure;
-module.exports.shutdown = shutdown;
